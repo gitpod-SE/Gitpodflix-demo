@@ -1,20 +1,18 @@
 import express from 'express';
 import cors from 'cors';
 import { Pool } from 'pg';
-import dotenv from 'dotenv';
-
-dotenv.config();
+import { config } from './config';
 
 const app = express();
-const port = process.env.PORT || 3001;
+const port = config.server.port;
 
-// Database configuration
+// Database configuration with validated environment variables
 const pool = new Pool({
-  user: process.env.DB_USER || 'gitpod',
-  host: process.env.DB_HOST || 'localhost',
-  database: process.env.DB_NAME || 'gitpodflix',
-  password: process.env.DB_PASSWORD || 'gitpod',
-  port: parseInt(process.env.DB_PORT || '5432'),
+  user: config.database.user,
+  host: config.database.host,
+  database: config.database.name,
+  password: config.database.password,
+  port: config.database.port,
 });
 
 // Middleware

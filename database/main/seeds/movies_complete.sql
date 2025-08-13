@@ -1,7 +1,19 @@
 -- Complete movie database with all categories and metadata
 -- This replaces all the scattered seed files with one comprehensive dataset
 
-TRUNCATE TABLE movies;
+-- Clear existing data and reset sequence
+TRUNCATE TABLE movies RESTART IDENTITY;
+
+-- Add unique constraint to prevent duplicates (if not already exists)
+DO $$ 
+BEGIN
+    IF NOT EXISTS (
+        SELECT 1 FROM pg_constraint 
+        WHERE conname = 'movies_title_year_unique'
+    ) THEN
+        ALTER TABLE movies ADD CONSTRAINT movies_title_year_unique UNIQUE (title, release_year);
+    END IF;
+END $$;
 
 INSERT INTO movies (
     title, 
@@ -132,9 +144,9 @@ INSERT INTO movies (
     1990,
     8.7,
     'https://image.tmdb.org/t/p/w500/aKuFiU82s5ISJpGZp7YkIr3kCUd.jpg',
-    'https://www.youtube.com/watch?v=vKQi3bBA1y8',
-    'vKQi3bBA1y8',
-    'https://www.youtube.com/watch?v=vKQi3bBA1y8',
+    'https://www.youtube.com/watch?v=qo5jJpHtI1Y',
+    'qo5jJpHtI1Y',
+    'https://www.youtube.com/watch?v=qo5jJpHtI1Y',
     ARRAY['Crime', 'Drama'],
     'Martin Scorsese',
     ARRAY['Robert De Niro', 'Ray Liotta', 'Joe Pesci', 'Lorraine Bracco'],
@@ -168,9 +180,9 @@ INSERT INTO movies (
     2017,
     8.0,
     'https://image.tmdb.org/t/p/w500/aMpyrCizvSdc0UIMblJ1srVgAEF.jpg',
-    'https://www.youtube.com/watch?v=vKQi3bBA1y8',
-    'vKQi3bBA1y8',
-    'https://www.youtube.com/watch?v=vKQi3bBA1y8',
+    'https://www.youtube.com/watch?v=gCcx85zbxz4',
+    'gCcx85zbxz4',
+    'https://www.youtube.com/watch?v=gCcx85zbxz4',
     ARRAY['Sci-Fi', 'Thriller'],
     'Denis Villeneuve',
     ARRAY['Ryan Gosling', 'Harrison Ford', 'Ana de Armas', 'Jared Leto'],
@@ -202,9 +214,9 @@ INSERT INTO movies (
     2016,
     7.9,
     'https://image.tmdb.org/t/p/w500/x2FJsf1ElAgr63Y3PNPtJrcmpoe.jpg',
-    'https://www.youtube.com/watch?v=vKQi3bBA1y8',
-    'vKQi3bBA1y8',
-    'https://www.youtube.com/watch?v=vKQi3bBA1y8',
+    'https://www.youtube.com/watch?v=tFMo3UJ4B4g',
+    'tFMo3UJ4B4g',
+    'https://www.youtube.com/watch?v=tFMo3UJ4B4g',
     ARRAY['Sci-Fi', 'Adventure', 'Drama'],
     'Denis Villeneuve',
     ARRAY['Amy Adams', 'Jeremy Renner', 'Forest Whitaker'],
@@ -219,9 +231,9 @@ INSERT INTO movies (
     2014,
     7.7,
     'https://image.tmdb.org/t/p/w500/pmAv14TPE2vKMIRrVeCd1Ll7K94.jpg',
-    'https://www.youtube.com/watch?v=vKQi3bBA1y8',
-    'vKQi3bBA1y8',
-    'https://www.youtube.com/watch?v=vKQi3bBA1y8',
+    'https://www.youtube.com/watch?v=EoQuVnKhxaM',
+    'EoQuVnKhxaM',
+    'https://www.youtube.com/watch?v=EoQuVnKhxaM',
     ARRAY['Sci-Fi', 'Thriller'],
     'Alex Garland',
     ARRAY['Domhnall Gleeson', 'Alicia Vikander', 'Oscar Isaac'],
