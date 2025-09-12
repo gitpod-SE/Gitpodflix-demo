@@ -2,6 +2,8 @@
 
 A modern streaming platform demo built for Gitpod environments, showcasing a full-stack application with React frontend, Node.js backend, and PostgreSQL database.
 
+<!-- Test change for PR demonstration -->
+
 ## Features
 
 - 🎥 Movie catalog with search and filtering
