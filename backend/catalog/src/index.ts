@@ -287,7 +287,11 @@ app.post('/api/movies/clear', async (req, res) => {
   }
 });
 
-// Start server
-app.listen(port, () => {
-  console.log(`Catalog service running on port ${port}`);
-}); 
+// Start server only if not in test environment
+if (process.env.NODE_ENV !== 'test') {
+  app.listen(port, () => {
+    console.log(`Catalog service running on port ${port}`);
+  });
+}
+
+export default app; 

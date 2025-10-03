@@ -11,8 +11,7 @@ module.exports = {
   collectCoverageFrom: [
     'src/**/*.ts',
     '!src/**/*.d.ts',
-    '!src/**/__tests__/**',
-    '!src/index.ts' // Exclude main server file from coverage as it's hard to test
+    '!src/**/__tests__/**'
   ],
   coverageThreshold: {
     global: {
